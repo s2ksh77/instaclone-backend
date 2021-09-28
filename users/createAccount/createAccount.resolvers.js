@@ -1,5 +1,5 @@
-import client from '../../client';
-import bcrpyt from 'bcrypt';
+import client from "../../client";
+import bcrpyt from "bcrypt";
 
 export default {
   Mutation: {
@@ -10,7 +10,7 @@ export default {
           where: { OR: [{ username }, { email }] },
         });
         if (existingUser) {
-          throw new Error('This username/password is already taken.');
+          throw new Error("This username/password is already taken.");
         }
         const uglyPassword = await bcrpyt.hash(password, 10); // hash password
         return client.user.create({
