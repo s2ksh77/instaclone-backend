@@ -4,7 +4,7 @@ export default gql`
   type User {
     id: Int!
     firstName: String!
-    latName: String
+    lastName: String
     username: String!
     email: String!
     createdAt: String!
@@ -13,7 +13,7 @@ export default gql`
   type Mutation {
     createAccount(
       firstName: String!
-      latName: String
+      lastName: String
       username: String!
       email: String!
       password: String!
