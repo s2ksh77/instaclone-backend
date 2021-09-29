@@ -4,9 +4,11 @@ import { protectResolver } from '../users.utils';
 
 const resolverFn = async (
   _,
-  { firstName, lastName, username, email, password: newPassword, bio },
-  { loggedInUser, protectResolver }
+  { firstName, lastName, username, email, password: newPassword, bio, avatar },
+  { loggedInUser }
 ) => {
+  const { filename, createReadStream } = await avatar;
+  const stream = createReadStream();
   let uglyPassword = null;
   if (newPassword) {
     uglyPassword = await bcrpyt.hash(newPassword, 10); // hash password
