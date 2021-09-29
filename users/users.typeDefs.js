@@ -9,13 +9,7 @@ export default gql`
     email: String!
     createdAt: String!
     updatedAt: String!
-  }
-  type LoginResult {
-    ok: Boolean!
-    token: String
-    error: String
-  }
-  type Query {
-    seeProfile(username: String!): User
+    bio: String
+    avatar: String
   }
 `;
