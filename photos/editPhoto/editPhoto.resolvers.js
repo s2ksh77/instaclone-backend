@@ -33,7 +33,9 @@ export default {
           },
         },
       });
-      console.log(photo);
+      return {
+        ok: true,
+      };
     }),
   },
 };
