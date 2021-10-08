@@ -1,7 +1,7 @@
-import { createWriteStream } from 'fs';
-import client from '../../client';
-import bcrpyt from 'bcrypt';
-import { protectResolver } from '../users.utils';
+import client from "../../client";
+import bcrpyt from "bcrypt";
+import { protectResolver } from "../users.utils";
+import { uploadToS3 } from "../../shared/shared.utils";
 
 const resolverFn = async (
   _,
@@ -11,14 +11,15 @@ const resolverFn = async (
   let avatarUrl = null;
 
   if (avatar) {
-    const { filename, createReadStream } = await avatar;
-    const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`;
-    const readStream = createReadStream();
-    const wirteStream = createWriteStream(process.cwd() + '/uploads/' + newFilename);
+    avatarUrl = await uploadToS3(avatar, loggedInUser.id, "avatars");
+    // const { filename, createReadStream } = await avatar;
+    // const newFilename = `${loggedInUser.id}-${Date.now()}-${filename}`;
+    // const readStream = createReadStream();
+    // const wirteStream = createWriteStream(process.cwd() + '/uploads/' + newFilename);
 
-    readStream.pipe(wirteStream);
-    avatarUrl = `http://localhost:4000/static/${newFilename}`;
-    console.log(avatarUrl);
+    // readStream.pipe(wirteStream);
+    // avatarUrl = `http://localhost:4000/static/${newFilename}`;
+    // console.log(avatarUrl);
   }
 
   let uglyPassword = null;
@@ -44,7 +45,7 @@ const resolverFn = async (
   } else {
     return {
       ok: false,
-      error: 'Could not update profile.',
+      error: "Could not update profile.",
     };
   }
 };

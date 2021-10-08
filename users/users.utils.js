@@ -1,5 +1,5 @@
-import jwt from 'jsonwebtoken';
-import client from '../client';
+import jwt from "jsonwebtoken";
+import client from "../client";
 
 export const getUser = async (token) => {
   try {
@@ -26,10 +26,15 @@ export const getUser = async (token) => {
 export function protectResolver(ourResolver) {
   return function (root, args, context, info) {
     if (!context.loggedInUser) {
-      return {
-        ok: false,
-        error: 'Please login to perform this action',
-      };
+      const query = info.operation.operation === "query";
+      if (query) {
+        return null;
+      } else {
+        return {
+          ok: false,
+          error: "Please login to perform this action",
+        };
+      }
     }
     return ourResolver(root, args, context, info);
   };
