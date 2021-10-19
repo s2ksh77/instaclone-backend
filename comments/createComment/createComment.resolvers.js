@@ -1,5 +1,5 @@
-import client from "../../client";
-import { protectResolver } from "../../users/users.utils";
+import client from '../../client';
+import { protectResolver } from '../../users/users.utils';
 
 export default {
   Mutation: {
@@ -15,10 +15,10 @@ export default {
       if (!ok) {
         return {
           ok: false,
-          error: "Photo not found.",
+          error: 'Photo not found.',
         };
       }
-      await client.comment.create({
+      const newComment = await client.comment.create({
         data: {
           payload,
           photo: {
@@ -35,6 +35,7 @@ export default {
       });
       return {
         ok: true,
+        id: newComment.id,
       };
     }),
   },
