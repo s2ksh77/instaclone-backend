@@ -1,5 +1,5 @@
-import client from "../../client";
-import { protectResolver } from "../users.utils";
+import client from '../../client';
+import { protectResolver } from '../users.utils';
 
 export default {
   Mutation: {
@@ -8,7 +8,7 @@ export default {
       if (!ok) {
         return {
           ok: false,
-          error: "That user does not exist.",
+          error: 'That user does not exist.',
         };
       }
       await client.user.update({
