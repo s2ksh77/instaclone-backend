@@ -1,4 +1,4 @@
-import client from "../../client";
+import client from '../../client';
 
 export default {
   Query: {
@@ -8,7 +8,11 @@ export default {
           photoId: id,
         },
         orderBy: {
-          createdAt: "desc",
+          createdAt: 'asc',
+        },
+        include: {
+          user: true,
+          photo: true,
         },
       }),
   },
