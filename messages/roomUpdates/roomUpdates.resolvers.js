@@ -1,7 +1,7 @@
-import pubsub from "../../pubsub";
-import { NEW_MESSAGE } from "../../constants";
-import { withFilter } from "graphql-subscriptions";
-import client from "../../client";
+import pubsub from '../../pubsub';
+import { NEW_MESSAGE } from '../../constants';
+import { withFilter } from 'graphql-subscriptions';
+import client from '../../client';
 
 export default {
   Subscription: {
@@ -18,9 +18,9 @@ export default {
           },
           select: { id: true },
         });
-        if (!room) throw new Error("You shall not see this.");
+        if (!room) throw new Error('You shall not see this.');
         return withFilter(
-          pubsub.asyncIterator(NEW_MESSAGE),
+          () => pubsub.asyncIterator(NEW_MESSAGE),
           async ({ roomUpdates }, { id }, { loggedInUser }) => {
             if (roomUpdates.roomId === id) {
               const room = await client.room.findFirst({
