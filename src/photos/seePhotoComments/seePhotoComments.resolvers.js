@@ -2,8 +2,8 @@ import client from '../../client';
 
 export default {
   Query: {
-    seePhotoComments: (_, { id }) =>
-      client.comment.findMany({
+    seePhotoComments: async (_, { id }) =>
+      await client.comment.findMany({
         where: {
           photoId: id,
         },
