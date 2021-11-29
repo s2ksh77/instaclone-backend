@@ -1,4 +1,4 @@
-import client from "../../client";
+import client from '../../client';
 
 export default {
   Query: {
@@ -6,7 +6,7 @@ export default {
       await client.user.findMany({
         where: {
           username: {
-            startsWith: keyword.toLowerCase(),
+            contains: keyword.toLowerCase(),
           },
         },
       }),

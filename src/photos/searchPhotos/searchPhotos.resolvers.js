@@ -1,4 +1,4 @@
-import client from "../../client";
+import client from '../../client';
 
 export default {
   Query: {
@@ -6,7 +6,7 @@ export default {
       client.photo.findMany({
         where: {
           caption: {
-            startsWith: keyword,
+            contains: keyword,
           },
         },
       }),
